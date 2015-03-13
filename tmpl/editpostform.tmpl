@@ -1,0 +1,37 @@
+<!-- tmpl_include name="header.tmpl" -->
+
+<!-- tmpl_if error_exists -->
+<p>
+<h2>Post Input Error</strong></h2>
+<!-- tmpl_var name="error_message" -->
+</p>
+<!-- /tmpl_if -->
+
+<p>
+<strong>Editing :</strong> <a href="/<!-- tmpl_var name="slug" -->"><!-- tmpl_var name="title" --></a>
+</p>
+
+<article class="post">
+<!-- tmpl_var name="html" -->
+</article>
+
+<p>
+<form method="post" action="/updatepost">
+<input type="hidden" name="post_id" value="<!-- tmpl_var name="slug" -->"> 
+<input type="hidden" name="rev"     value="<!-- tmpl_var name="rev" -->"> 
+
+<textarea id="textareaboxpost" name="markup" rows="25" cols="80" ><!-- tmpl_var name="markup" --></textarea>
+</p>
+
+<div style="float:right">
+<span class="greytext"><a href="/splitscreenedit/<!-- tmpl_var name="slug" -->"><small>[ | ]</small></a></span>
+</div>
+
+<p>
+<input class="submitbutton" type="submit" name="sb" value="Preview">
+ &nbsp; &nbsp; &nbsp; &nbsp; 
+<input class="submitbutton" type="submit" name="sb" value="Update">
+</p>
+
+</form>
+<!-- tmpl_include name="footer.tmpl" -->

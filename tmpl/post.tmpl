@@ -1,0 +1,46 @@
+<!-- tmpl_include name="header.tmpl" -->
+
+<!-- <!-- tmpl_var name="post_type" --> -->
+
+<article class="post">
+
+<!-- tmpl_if loggedin -->
+<div style="float:right; margin-top: 10px;">
+<span class="greytext"><a href="/edit/<!-- tmpl_var name="slug" -->">edit</a></span>
+</div>
+<!-- /tmpl_if -->
+
+<!-- tmpl_if reading_time -->
+<div id="post-min-read">
+<small><!-- tmpl_var name="reading_time" --> min</small>
+</div>
+<!-- /tmpl_if -->
+
+<section id="post-top">
+<!-- tmpl_var name="html" -->
+</section>
+
+<div class="greytext">
+<p> 
+by <a href="/<!-- tmpl_var name="author_profile" -->"><!-- tmpl_var name="author" --></a>
+ - <!-- tmpl_var name="word_count" --> words
+<!-- tmpl_if reading_time -->
+ - <!-- tmpl_var name="reading_time" --> min read
+<!-- /tmpl_if -->
+<br />
+created: <time datetime="<!-- tmpl_var name="created_at" -->"><!-- tmpl_var name="created_at" --></time>
+<!-- tmpl_if modified -->
+ - modified: <time datetime="<!-- tmpl_var name="updated_at" -->"><!-- tmpl_var name="updated_at" --></time>
+<!-- /tmpl_if -->
+ - <a title="Permalink" href="/<!-- tmpl_var name="slug" -->">#</a>
+
+<!-- tmpl_if loggedin -->
+<br />
+ <a href="/delete/<!-- tmpl_var name="slug" -->">delete</a>
+<!-- /tmpl_if -->
+</p>
+</div>
+
+</article>
+
+<!-- tmpl_include name="footer.tmpl" -->

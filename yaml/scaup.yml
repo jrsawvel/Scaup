@@ -1,0 +1,24 @@
+---
+    template_home:                  /home/name/Scaup/tmpl
+    site_name:                      Scaup 
+    app_name:                       Scaup v1.0
+    home_page:                      http://sub.domain.com
+    site_description:               Note-taking App
+    domain_name:                    sub.domain.com
+    css_dir_url:                    http://sub.domain.com/css 
+    maincss_url:                    http://sub.domain.com/css/grebe.css
+    api_url:                        http://sub.domain.com/api/v1
+    background_image:               http://sub.domain.com/images/something.jpg 
+    cookie_prefix:                  scaup 
+    max_entries_on_page:            15 
+    database_name:                  scauptest
+    mailgun_api_key:                mailgun-api-key
+    mailgun_domain:                 mailgun-supplied-info-here
+    mailgun_from:                   Mailgun Sandbox <postmaster@mailgun-supplied-info>
+    debug_mode:                     0
+    multiple_sessionids:            1
+    memcached_port:                 11211
+    write_html_to_memcached:        1
+    read_html_from_memcached:       1
+    author_name:                    YourName
+    author_profile:                 profile

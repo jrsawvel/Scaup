@@ -1,0 +1,13 @@
+package Modules;
+use strict;
+use warnings;
+use diagnostics;
+use CGI;
+use CGI::Carp qw(fatalsToBrowser);
+use CouchDB::Client;
+use App::Config;
+use App::Page;
+use App::User;
+use App::Utils;
+use App::Error;
+1;

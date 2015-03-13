@@ -1,0 +1,39 @@
+<!-- tmpl_if errorexists -->
+<p>
+<h2>Article Input Error</strong></h2>
+<!-- tmpl_var name="errormessage" -->
+</p>
+<!-- /tmpl_if -->
+
+<!-- tmpl_if previewingpost -->
+<p>
+Previewing post ...
+</p>
+
+<!-- tmpl_if is_article -->
+<h1><!-- tmpl_var name="preview_title" --></h1>
+<!-- /tmpl_if -->
+<article class="post">
+<!-- tmpl_var name="formatted_text" -->
+</article>
+<!-- /tmpl_if -->
+
+<p>
+<form id="grebeform" method="post" action="<!-- tmpl_var name="cgi_app" -->/createpost">
+<textarea id="textareaboxpost" name="markup_content" rows="15" cols="60"><!-- tmpl_var name="post_text" --></textarea>
+</p>
+
+<div style="float:right">
+<a href="<!-- tmpl_var name="cgi_app" -->/splitscreen"><small>split</small></a>
+
+</div>
+
+<p>
+<input class="submitbutton" type="submit" name="sb" value="Preview">
+</p>
+
+<p>
+<input class="submitbutton" type="submit" name="sb" value="Post">
+</p>
+
+</form>

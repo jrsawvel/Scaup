@@ -1,0 +1,12 @@
+
+JSON after successfully creating a new post:
+
+{
+    "status"      : 200,
+    "description" : "OK",
+    "html"        : "<p>just a simple <strong>hello world</strong> note number 5</p>",
+    "post_id"     : "just-a-simple-hello-world-note-number-5",
+    "rev"         : "1-5ab5b5b3c80af80dee9cbfe8ead97592"
+}
+
+

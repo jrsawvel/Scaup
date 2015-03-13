@@ -1,0 +1,71 @@
+<!doctype html>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+  <title>enhanced typing mode</title>
+<meta charset="utf-8"> 
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /> -->
+<meta name="viewport" content="initial-scale=1, width=device-width" />
+
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"> 
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" media="screen" href="<!-- tmpl_var name="home_page" -->/javascript/splitscreen/splitscreen.css" />
+
+<script src="<!-- tmpl_var name="home_page" -->/javascript/splitscreen/jquery.min.js"></script>
+<script src="<!-- tmpl_var name="home_page" -->/javascript/splitscreen/jquery.minitabs.js"></script>
+<script src="<!-- tmpl_var name="home_page" -->/javascript/splitscreen/app.js"></script> 
+<script src="<!-- tmpl_var name="home_page" -->/javascript/splitscreen/minified.js"></script>
+<script src="<!-- tmpl_var name="home_page" -->/javascript/splitscreen/splitscreen.js"></script>
+
+<script>
+    window.onbeforeunload = function(){
+     return 'You have begun to edit.';
+};    
+
+</script>
+
+</head>
+<body>
+
+<header>
+<nav>
+<div id="navmenu">
+<ul>
+<li><a title="Home Page" href="<!-- tmpl_var name="home_page" -->"><!-- tmpl_var name="site_name"--></a></li>
+<li><button class="bluebutton" id="moveButton">&gt;&gt;</button></li>
+<li><button class="bluebutton" id="resetButton">&lt;&lt;</button></li> 
+<li><button class="bluebutton" id="previewButton">preview</button></li> 
+<li><button class="bluebutton" id="saveButton">save</button></li>
+<li><span id="saveposttext">... post saved ...</span></li>
+</ul>
+</div>
+</nav>
+</header>
+
+<div id="container">
+
+  <div id="col_left" class="col">
+   <form id="parulaform" method="post" action="<!-- tmpl_var name="cgi_app" -->/addarticle">
+   <input type="hidden" id="splitscreencgiapp"     value="<!-- tmpl_var name="cgi_app" -->">
+   <input type="hidden" id="splitscreenapiurl"     value="<!-- tmpl_var name="api_url" -->">
+   <input type="hidden" id="splitscreenaction"     value="<!-- tmpl_var name="action" -->">
+   <input type="hidden" id="splitscreenpostid"     value="<!-- tmpl_var name="post_id" -->">
+   <input type="hidden" id="splitscreenpostrev"    value="<!-- tmpl_var name="post_rev" -->">
+    <span class="tools">
+    </span>
+    <textarea name="article" onkeypress="return countKeyStrokes()" id="tx_input" cols="80" rows="20" class="panel" autofocus><!-- tmpl_var name="markup" --></textarea>
+   </form>
+  </div> <!-- end col_left -->
+
+  <div id="col_right" class="col">
+   <article class="post">
+    <div id="text_preview" class="panel">
+    </div> <!-- end text_preview -->
+   </article>
+  </div> <!-- end col_right -->
+
+</div> <!-- end container -->
+
+</body>
+</html>

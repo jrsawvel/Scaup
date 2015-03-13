@@ -1,0 +1,902 @@
+
+/* scaup.css 11Feb2015 */
+
+/* ==========================================================================
+   Table of Contents 
+   ========================================================================== */
+
+/*
+
+    0.  Includes
+    1.  HTML Tags
+    2.  Header and Nav
+    3.  Footer 
+    4.  Displaying a Post
+
+ */
+
+
+/* ==========================================================================
+   0. Includes
+   ========================================================================== */
+
+@import url(normalize.css); 
+
+
+
+/* ==========================================================================
+   1. HTML - Defining some standard markup commands
+   ========================================================================== */
+
+html {
+    height: 100%;
+    max-height: 100%;
+}
+
+body {
+    height: 100%;
+    max-height: 100%;
+    color: #000000;
+    background: #ffffff;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif; 
+    /* font-family: 'Libre Baskerville', serif; */
+    /* font-family: 'Raleway', sans-serif; */
+    font-size: 100%;   /* ~16px */ /* this is defined in the text resizer css file */
+    line-height: 1.5em;
+    width: 100%;
+}  
+
+img {
+    max-width: 100%;
+}
+
+textarea {
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;  
+    font-size: 1em;
+    overflow: auto;
+    background: #ffffff;
+    border: 1px solid #ccc; 
+}
+
+blockquote {
+    margin-left: .6em;
+    padding-left: 1em;
+    border-left: .1em solid #666;  
+/*    border-left: .1em solid #ddd;   */
+
+/*
+    margin: .5em; 
+    background: #f5faff;
+    padding: 0 .5em 0 .5em;   
+    border: 1px solid #cccccc;
+*/
+}
+
+table {
+    font-size: .8em;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif; 
+    color: #000000;
+}
+
+h1, h2, h3, h4, h5 {
+    color: #000000;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;  
+/*    font-family: 'Libre Baskerville', serif;  */
+}
+
+h1 {
+    padding: 0;
+    margin: 0;
+    font-size: 1.6em;
+}
+
+h2 {
+    font-size: 1.5em; 
+}
+
+h3 {
+    font-size: 1.4em; 
+}
+
+h4 {
+    font-size: 1.3em; 
+}
+
+h5 {
+    font-size: 1.2em; 
+}
+
+h2, h3, h4, h5 {
+    margin: 50px 0 10px 0;
+    padding: 0;
+}
+
+hr.shortgrey {
+   border: 0; 
+   height: 1px; 
+   background: #ddd;
+   width: 25%;
+   margin-top:2em;
+   margin-bottom:2em;
+}
+
+a {
+    text-decoration: none; 
+    color: #0000ff;
+}
+
+a:visited {
+    color: #cc3399;
+} 
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline; 
+    color: #ff0000;
+}
+
+/* ol formatting adapted from: 
+   http://www.456bereastreet.com/archive/201105/styling_ordered_list_numbers/ 
+*/
+ol {
+    counter-reset: li; /* Initiate a counter */
+    margin-left: 0; /* Remove the default left margin */
+    padding-left: 0; /* Remove the default left padding */
+}
+
+ol > li {
+    position: relative; /* Create a positioning context */
+    margin: 0 0 6px 2em; /* Give each list item a left margin to make room for the numbers */
+    padding: 4px 8px; /* Add some spacing around the content */
+    list-style: none; /* Disable the normal item numbering */
+}
+
+ol > li:before {
+    content: counter(li) ". "; /* Use the counter as content */
+    counter-increment: li; /* Increment the counter by 1 */
+    /* Position and style the number */
+    position: absolute;
+    top: -2px;
+    left: -2em;
+    width: 2em;
+    /* Some space between the number and the content in browsers that support
+       generated content but not positioning it (Camino 2 is one example) */
+    margin-right: 8px;
+    padding: 4px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* 3may2013 I think it's suppose to be ol not ul  li ul {margin-top:6px;} */
+li ol {
+    margin-top: 6px;
+} 
+
+ol ol li:last-child {
+    margin-bottom: 0;
+}
+
+input {
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px; 
+    border: 1px solid #cccccc;
+    padding-left: .4em;
+}
+
+/*
+ul{ list-style: none; }
+ul li:before{ content:"."; font-size:10pt; }
+*/
+
+
+/* ==========================================================================
+   2. Header and Nav Tag Definitions
+   ========================================================================== */
+
+header nav ul {
+    list-style-type: none;
+    padding: 0 0 0 0; 
+    margin: 0 0 0 0;
+}
+
+header nav ul li {
+    display: inline-block; 
+}
+
+header nav ul li a {
+    text-align: left;
+    padding: 0 .5em;
+}
+
+header {
+/*    border: 1px solid #cccccc;  */
+    text-align: left;
+    top: 0;
+    left: 0;
+    display: block;
+    z-index: 100; 
+    float: left;
+    width: 100%;
+    left: auto;
+    position: absolute;
+    height: 20px;
+}
+
+header a {
+    color: #666666;
+    text-decoration: none;
+}
+
+header a:visited {
+    color: #666666;
+    text-decoration: none;
+}
+
+header a:hover {
+    color: #666666;
+    text-decoration: underline;
+}
+
+
+/* ==========================================================================
+   3. Footer
+   ========================================================================== */
+
+footer ul {
+    list-style-type: none;
+    padding: 0 0 0 0; 
+    margin: 0 0 0 0;
+}
+
+footer ul li {
+    display: inline-block; 
+}
+
+footer ul li a {
+    text-align: left;
+    padding: 0 .5em;
+}
+
+footer {
+    clear: right;
+    clear: left;
+    font-size: .9em;
+    text-align: center;
+    padding-bottom: 25px;
+}
+
+/* ==========================================================================
+   4. Post - Formatting the main part of an article and a stream of posts
+   ========================================================================== */
+
+.largescreens-note {
+    font-size: 90%;    
+    line-height: 1.2em;
+}
+
+.post {
+    color: #000000;
+    font-size: 1.2em; 
+    /* font-size: 125% */
+    /* font-size: 120%; approx same as 1.2em */
+    line-height: 1.7em;
+}
+
+.post ul > li {
+    padding: 4px; /* Add some spacing around the content */
+}
+
+/* for the h1 title on the article page */
+#post-top {
+    padding-top: 10px;  
+}
+
+/* on the stream page that show parts of a post/article */
+.post-stream {
+/*    padding: 20px 0 36px 0; */
+    font-size: 1.1em;
+    padding: 10px 0 10px 0;
+}
+
+.post-stream h1 {
+    /* font-size: 1.2em; */
+    font-size: 1.6em;
+}
+
+.post big em {
+    font-family: "Open Sans", Arial, Helvetica, sans-serif; 
+}
+.post big {
+    color: #666;
+}
+
+.post strong {
+    color: #000000;
+}
+
+.post b {
+    background: #ffff00;
+    font-weight: normal;
+}
+
+.post a strong {
+    color: #0000ff;
+}
+
+.post a:visited strong {
+    color: #cc3399;
+}
+
+.post a:hover strong {
+    text-decoration: underline;
+}
+
+.post a:active strong {
+    text-decoration: underline; color: #ff0000;
+}
+
+.post code {
+    font-size:13px;
+    background: #f8f8f8;
+    padding: 2px 5px 2px 5px;
+    border: 1px solid #dddddd;
+}
+
+.post pre {
+    line-height: 1em; 
+    background: #f8f8f8;
+}
+
+.post pre code {
+    padding:0;
+    border:none;
+}
+
+/* ==========================================================================
+   5. Additional Custom CSS
+   ========================================================================== */
+
+.post-stream .streamtitle a {
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold; 
+/*    font-family: 'Libre Baskerville', serif;  */
+}
+
+.post-stream .streamtitle a:hover {
+    color: #000000;
+    text-decoration: underline;
+}
+
+
+/* a. site-wide responsive content display.
+   used within a section tag that defines the main viewing of the site, 
+   and it's used sitewide as a responsive wrapper to make content scale. */
+#content {
+    position: relative;
+    width:80%;
+    max-width: 700px;
+    margin: 0px auto 0px;
+}
+
+/* b. textarea posting box */
+#textareaboxpost {
+    width: 90%
+    height: 250px;
+}
+
+/* c. highlighted text - used with the custom q. q.. commands for quoting other text. */
+.highlighted {
+    margin-left: .6em;
+    padding-left: 1em;
+    border-left: .1em solid #666;  
+/*
+    margin: .5em; 
+    background: #f5faff;
+    padding: 0 .5em 0 .5em;  
+    border: 1px solid #cccccc;
+*/
+}
+
+/* d. next three elements are used when comparing two versions of a post */
+.added {
+    background-color: #cff;
+}
+
+.removed {
+    background-color: #fcc;
+}
+
+.changed {
+    background-color: #ff6;
+}
+
+/* e. CSS to control the image header area of the home page */
+/* Big cover image on the home page */
+
+/* tint the image. */
+#site-head:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.2);
+    text-indent: -9999em;
+    width: 100%;
+    height: 100%;
+    content: "";
+    z-index: 1;
+}
+
+#site-head {
+    position: relative;
+    display: table;
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    background: #000000 no-repeat center center; 
+    background-size: cover;
+    background-position: center;
+    height: 30%;
+    /* height: 60%;  see NOTE above to make this work */
+/*
+    padding-top: 1em;  
+    padding-bottom: 1em;
+*/
+
+    /* if using a banner image on the homepage, and if want to 
+       fade or lighten the image (whiteish), then use the opacity commans.
+    */
+    /* opacity: 0.5; */
+    /* filter:alpha(opacity=50); */ /* For IE8 and earlier */
+}
+
+#blog-author-image {
+    width:50px;
+    height:50px;
+    border-radius: 25px;
+    -moz-border-radius: 25px;
+    -khtml-border-radius: 25px;
+    -webkit-border-radius: 25px;
+}
+
+#blog-title {
+    font-size: 2em;
+    line-height: 1.5em; 
+    /* make the title stand out more */
+    font-weight: bold; 
+    text-shadow: 2px 2px #000000; 
+    -moz-text-shadow: 2px 2px 2px #000000;
+    -webkit-text-shadow: 2px 2px 2px #000000;
+    filter: dropshadow(color=#000000, offx=2, offy=2);
+    display: block;
+}
+
+#blog-title a {
+    text-decoration: none;
+}
+
+#blog-title a:visited {
+    text-decoration: none;
+}
+
+#blog-description {
+    font-size: 1.2em;
+    line-height: 1.5em; 
+    margin-bottom: 20px; 
+    /* make the description stand out more */
+    text-shadow: 2px 2px #000000; 
+    -moz-text-shadow: 2px 2px 2px #000000;
+    -webkit-text-shadow: 2px 2px 2px #000000;
+    filter: dropshadow(color=#000000, offx=2, offy=2);
+    display: block;
+}
+
+#blog-title, #blog-title a, #blog-title a:visited, #blog-description {
+    color: #fff;
+} 
+
+/* f. heading text - used for the h1, h2, h3, etc tags */
+.headingtext a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.headingtext a:visited {
+    color: #000000;
+    text-decoration: none;
+}
+
+.headingtext a:hover {
+    color: #000000;
+    text-decoration: underline;
+}
+
+.scaup-article {
+    text-indent: -9999px;
+    visibility: hidden;
+    display: none;
+}
+
+/* g. small, grey-colored text links */
+.greytext {
+    font-size: 80%;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif; 
+}
+
+.greytext a {
+    color: #888888;
+}
+
+.greytext a:visited {
+    color: #888888;
+}
+
+.greytext a:hover {
+    color: #000000; 
+    text-decoration: underline;
+}
+
+/* h. image header for post page */
+
+.stream-imageheader {
+    height: 300px;
+    margin: 0 auto 20px auto;
+    overflow: hidden;
+    max-width: 700px;
+    background: gray;
+}
+
+.stream-imageheader .inner {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.stream-imageheader img {
+    display: block;
+    max-width: 100%;
+    visibility: hidden
+}
+
+#largeimageheader {
+    position: relative;
+    display: table;
+    width: 100%;
+    height: 60%;
+    background: #000000 no-repeat center center; 
+    background-size: cover;
+    text-align: center;
+    color: #ffffff;
+}
+
+.codeClass pre {
+    white-space: pre;
+}
+
+.fenceClass pre {
+    white-space: pre;
+}
+
+ /*  http://stackoverflow.com/questions/2295766/how-to-create-a-scrollable-div-tag-vertically-supported-in-chrome */
+.codeClass {
+    width: 100%;
+    overflow-y: scroll;
+    max-height:500px; 
+    background: #f8f8f8;
+    border: 1px solid #dddddd;
+    padding: 2px 5px 2px 5px;
+    white-space: nowrap;
+}
+
+.fenceClass {
+    overflow-x: scroll;
+    background: #f8f8f8;
+    border: 1px solid #dddddd;
+    padding: 2px 5px 2px 5px;
+}
+
+/* j. submit button */
+.submitbutton {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px; 
+    font-size: 1em;
+    color: #666;
+    background: #fff;
+    border: 1px solid #b8b8b8;
+}
+
+.submitbutton:hover {
+    color: #000;
+    border: 1px solid #222;
+}
+
+/* k. table of contents box displayed in upper right corner of a post page */
+ #toc {
+    font-family: "Open Sans", Arial, Helvetica, sans-serif; 
+    font-size: .8em;
+    float: right;
+    background: #f0fff0; /* light blue */
+    display: inline;
+    width: 12.5em;
+    text-align: left;
+    border: 1px solid #cccccc;
+    line-height: 1.2em;
+    padding-top: .3em;
+    padding-bottom: .3em;
+    margin: 1.2em 0 1.2em 1.2em;
+} 
+
+.toclevel1 {
+    margin-left: 0;
+}
+
+.toclevel2 {
+    margin-left: .3em;
+}
+
+.toclevel3 {
+    margin-left: .6em;
+}
+
+.toclevel4 {
+    margin-left: .9em;
+}
+
+.toclevel5 {
+    margin-left: 1.2em;
+}
+
+/* l. miscellaneous */
+
+/* used in the nav area */
+.userlink {
+/*    background: #ffffff; using font awesome instead of plain text */
+}
+
+/* http://fortawesome.github.io/Font-Awesome/ */
+.fa {
+    color: #666666;
+    color: #c0c0c0;
+}
+
+.fa-cog, .fa-pencil, .fa-file-text  {
+    color: #3300ff;
+}
+
+.undelete {
+    background: #ffff99;
+    font-size: 0.6em;
+}
+
+.smallscreens {
+    display: none;
+}
+
+#loggedinuserinfo {
+    background: #e0eeee;
+}
+
+#olderlink {
+    float: right;
+}
+
+#post-min-read {
+    float:right; 
+    font-size:80%; 
+    margin-top:0px;
+}
+
+/* ==========================================================================
+   7. Utilities from the Ghost blog Casper Theme
+   ========================================================================== */
+/* Hides content */
+.hidden {
+    text-indent: -9999px;
+    visibility: hidden;
+    display: none;
+}
+/* Creates a responsive wrapper that makes our content scale nicely */
+.inner {
+    position: relative;
+    width: 80%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+/* Centres vertically. (IE8+) */
+.vertical {
+    display: table-cell;
+    vertical-align: middle;
+
+/* if want the text on the image to be tinted too, then comment out these two lines.
+   these two lines will make the the text color be what's defined in site-head, blog-title, or blog-description.
+*/
+    z-index: 10; 
+    position: relative;
+}
+
+
+
+
+/* ==========================================================================
+   7. Media Queries
+   ========================================================================== */
+
+/*
+  desktop/laptop > 1224px 
+  tablet 768-1024px 
+  smartphone 320-480px  
+*/
+
+/* 45em = 720 px */
+@media only screen and (max-width: 45em) { 
+    #content {
+        width: 90%;
+    }
+}
+
+/* 37.5em = 600px */
+@media only screen and (max-width: 37.5em) {
+    .stream-imageheader {
+        height: 240px;
+    }
+
+    .post-stream h1 {
+        font-size: 1.1em;
+    }
+
+    #site-head {
+        height: 20%;
+    }
+
+    #largeimageheader {
+        padding-top: 65%;
+        height: auto;
+    }
+
+    .post {
+        /* font-size: 1.15em; commented out on 2-Oct-2014 */
+        /* line-height: 1.4em; commented out on 2-Oct-2014 */
+        /* font-size: 125%; */ /* increases the font size when viewed on a small screen */
+    }
+
+    #toc {
+        display: none;
+    }
+
+    /* .homepage-post-author, .homepage-post-date */
+    .site-description, .largescreens-article, .largescreens-draft, .homepage-min-read,  .homepage-tagstring, #post-min-read {
+        display: none; /* commented out for testing on 19jun2014 */
+    }
+
+    .post-stream {
+        line-height: 1.2em;
+       /* padding: 20px 0 20px 0;  */
+    }
+
+    .smallscreens {
+        display: inline;
+    }
+
+    h1 {
+        font-size: 1.40em;
+    }
+
+    h2 {
+        font-size: 1.30em; 
+        /* padding-top: .2em; */
+    }
+
+    h3 {
+        font-size: 1.20em; 
+    }
+
+    h4 {
+        font-size: 1.15em; 
+    }
+
+    h5 {
+        font-size: 1.10em; 
+    }
+
+    #microblogtextareabox {
+        width: 85%;
+    }   
+
+    footer ul li a {
+        padding: 0 .3em;
+    }
+
+    #blog-title {
+        font-size: 1.8em;
+    }
+
+}
+
+@media only screen and (max-width: 480px) { 
+    .stream-imageheader {
+        height: 180px;
+    }
+}
+
+@media only screen and (min-width: 320px) { 
+    #textareaboxpost {
+        width: 95%;
+        height: 125px;
+    }
+
+    .post {
+        color: #222222;
+    }
+
+    #blog-title, #blog-title a, #blog-title a:visited, #blog-description {
+    } 
+}
+
+@media only screen and (max-width: 320px) { 
+    .stream-imageheader {
+        height: 100px;
+    }
+
+    #scroll_text {
+        width: 100%;
+        height: 700px;
+        overflow-y: auto; 
+        -webkit-overflow-scrolling: touch;
+    }
+    #blog-title {
+        font-size: 1.5em;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    #textareaboxpost {
+        width: 90%;
+        height: 200px;
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    #textareaboxpost {
+        width: 90%;
+        height: 250px;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    #content {
+        padding-top: 10px;
+    }
+}
+
+/* 76.5em = 1224 px */
+@media only screen and (min-width: 76.5em) { 
+/* use if font-size = 125% 
+    .post {
+        color: #333333;
+    }
+*/
+ 
+    .post p {
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+}    
+
+
+
+
+/* ==========================================================================
+   End scaup.css
+   ========================================================================== */
+
+
+

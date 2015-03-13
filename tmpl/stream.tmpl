@@ -1,0 +1,58 @@
+<!-- tmpl_include name="header.tmpl" -->
+
+<!-- tmpl_if search -->
+<p>
+<!-- tmpl_var name="search_type_text" --> results for &ldquo;<!-- tmpl_var name="keyword" -->&rdquo;
+ - <a href="/<!-- tmpl_var name="search_type" -->/<!-- tmpl_var name="keyword" -->">#</a>
+</p>
+<!-- tmpl_else -->
+<!-- tmpl_unless loggedin -->
+<p>
+<center>
+<span class="site-description greytext"><a href="/info"><!-- tmpl_var name="site_description" --></a></span>
+</center>
+</p>
+<!-- /tmpl_unless -->
+<!-- /tmpl_if -->
+
+<!-- tmpl_if loggedin -->
+<p>
+<form id="scaupform" method="post" action="/createpost">
+<input type="hidden" name="post_location" value="notes_stream"> 
+<textarea id="microblogtextareabox" name="markup" rows="5" cols="50" wrap="virtual" autofocus></textarea>
+<br>
+<input class="submitbutton" type="submit" name="sb" value="Post"> 
+ &nbsp; &nbsp; &nbsp; &nbsp;  <span class="greytext"><a href="/logout">logout</a></span>
+ &nbsp; &nbsp; &nbsp; &nbsp;  <span class="greytext"><a title="large textarea box for writing" href="/compose">compose</a></span>
+ &nbsp; &nbsp; &nbsp; &nbsp;  <span class="greytext"><a title="javascript editor" href="/splitscreen">[ | ]</a></span>
+</form>
+</p>
+<!-- /tmpl_if -->
+
+<!-- tmpl_loop name="stream_loop" -->
+<article>
+<p>
+<div class="post-stream">
+<!-- <!-- tmpl_var name="post_type" --> -->
+<!-- tmpl_var name="text_intro" -->
+<!-- tmpl_if more_text_exists -->
+<a href="/<!-- tmpl_var name="slug" -->"><strong>more&gt;&gt;</strong></a>
+<!-- /tmpl_if -->  
+<!-- tmpl_if reading_time --> 
+<small><!-- tmpl_var name="reading_time" --> min read</small>
+<!-- /tmpl_if -->
+<br />
+<span class="greytext"><a title="by <!-- tmpl_var name="author" -->" href="/<!-- tmpl_var name="slug" -->"><time datetime="<!-- tmpl_var name="updated_at" -->"><!-- tmpl_var name="updated_at" --></time></a> &nbsp; &nbsp; <!-- tmpl_var name="tag_list" --></span>
+</div>
+</p>
+</article>
+<!-- /tmpl_loop -->
+
+<!-- tmpl_if not_last_page -->
+<span id="olderlink"><a href="<!-- tmpl_var name="next_page_url" -->">Older &gt;&gt;</a></span>
+<!-- /tmpl_if -->
+<!-- tmpl_if not_page_one -->
+<a href="<!-- tmpl_var name="previous_page_url" -->">&lt;&lt; Newer</a>
+<!-- /tmpl_if -->
+
+<!-- tmpl_include name="footer.tmpl" -->

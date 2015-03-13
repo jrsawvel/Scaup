@@ -1,0 +1,71 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+<title>Error | Scaup</title>
+<meta charset="UTF-8" /> 
+<!--[if lt IE 9]> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<![endif]-->
+<meta name="generator" content="Grebe" />
+<meta name="viewport" content="width=device-width initial-scale=1.0 user-scalable=yes" />
+<link rel='stylesheet' href="http://fonts.googleapis.com/css?family=Open+Sans:regular,italic,bold,bolditalic"  type="text/css"> 
+<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'> 
+<!-- <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'> -->
+<link rel="stylesheet" type="text/css" href="http://scaup.soupmode.com/css/scaup.css"  /> 
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+<body>
+
+<header>
+<div style="float:right;padding-right:10px;">
+<a title="Search" href="/searchform"><small>search</small></a>
+</div>
+<nav>
+<ul>
+<li><a title="Home Page" href="http://scaup.soupmode.com"><small>home</small></a></li> 
+</ul>
+</nav>
+</header>
+
+<section id="content">
+
+
+<section id="post-top">
+<h1>An Error Has Occurred:</h1>
+</section>
+
+<p>
+Runtime Error (2):
+</p>
+
+<p>
+malformed JSON string, neither array, object, number, string or atom, at character offset 0 (before "(end of string)") at ../lib/App/PostsApi.pm line 155.
+
+</p>
+
+</section> <!-- closing id=content -->
+<br /> 
+<footer>
+<ul>
+<li><a title="About, Help, Contact" href="/info">info</a></li> 
+</ul>
+
+<div>
+&copy; 2015 <a href="http://scaup.soupmode.com"><strong>Scaup</strong></a>  - Note-taking App
+</div>
+
+</footer>
+
+</body>
+</html>
+
+
+
