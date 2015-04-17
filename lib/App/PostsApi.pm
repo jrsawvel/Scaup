@@ -13,6 +13,7 @@ use URI::Escape::JavaScript qw(escape unescape);
 use App::Error;
 use App::PostTitle;
 use App::Post;
+use App::User;
 
 
 # GET page 3 of a stream of posts 
@@ -170,7 +171,8 @@ sub _create_post {
 
     my $author                 = Config::get_value_for("author_name");
     my $db                     = Config::get_value_for("database_name");
-    if ( $logged_in_author_name ne $author ) {
+
+    if ( !User::is_valid_login($logged_in_author_name, $session_id) ) { 
         Error::report_error("400", "Unable to peform action.", "You are not logged in.");
     }
 
@@ -291,7 +293,8 @@ sub _update_post {
 
     my $author                 = Config::get_value_for("author_name");
     my $db                     = Config::get_value_for("database_name");
-    if ( $logged_in_author_name ne $author ) {
+
+    if ( !User::is_valid_login($logged_in_author_name, $session_id) ) { 
         Error::report_error("400", "Unable to peform action.", "You are not logged in.");
     }
 
@@ -323,7 +326,8 @@ sub _update_post {
     } 
     my $title           = $o->get_post_title();
     my $post_type       = $o->get_content_type(); # article or note
-    my $slug            = $o->get_slug();
+    # my $slug            = $o->get_slug();
+    my $slug            = $post_id;
     my $html            = Post::_markup_to_html($markup, $o->get_markup_type(), $slug);
 
 

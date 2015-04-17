@@ -16,14 +16,17 @@ use Cache::Memcached::libmemcached;
 
 use App::PostTitle;
 use App::Stream;
+use App::User;
 
 
+# calling my own API, trying to cut down on redundant code
+# have not started using this yet
 sub new_create_post {
     my $logged_in_author_name  = User::get_logged_in_author_name(); 
     my $session_id             = User::get_logged_in_session_id(); 
-    my $author                 = Config::get_value_for("author_name");
     my $db                     = Config::get_value_for("database_name");
-    if ( $logged_in_author_name ne $author ) {
+
+    if ( !User::is_valid_login($logged_in_author_name, $session_id) ) { 
         Page->report_error("user", "Unable to peform action.", "You are not logged in.");
     }
 
@@ -93,12 +96,11 @@ sub new_create_post {
 sub create_post {
     my $logged_in_author_name  = User::get_logged_in_author_name(); 
     my $session_id             = User::get_logged_in_session_id(); 
-    my $author                 = Config::get_value_for("author_name");
     my $db                     = Config::get_value_for("database_name");
-    if ( $logged_in_author_name ne $author ) {
+
+    if ( !User::is_valid_login($logged_in_author_name, $session_id) ) { 
         Page->report_error("user", "Unable to peform action.", "You are not logged in.");
     }
-
 
     my $q = new CGI;
     my $submit_type     = $q->param("sb"); # Preview or Post 
@@ -134,7 +136,6 @@ sub create_post {
         exit;
     }
 
-
     my $tmp_post = $html;
     $tmp_post =~ s|<more />|\[more\]|;
     $tmp_post =~ s|<h1 class="headingtext">|\[h1\]|;
@@ -160,7 +161,7 @@ sub create_post {
     'more_text_exists'      =>  $more_text_info->{'more_text_exists'},
     'post_type'             =>  $post_type,
     'tags'                  =>  \@tags,
-    'author'                =>  $author,
+    'author'                =>  $logged_in_author_name,
     'created_at'            =>  $created_at,
     'updated_at'            =>  $created_at,
     'reading_time'          =>  $post_stats->{'reading_time'},
@@ -197,9 +198,9 @@ sub create_post {
 sub update_post {
     my $logged_in_author_name  = User::get_logged_in_author_name(); 
     my $session_id             = User::get_logged_in_session_id(); 
-    my $author                 = Config::get_value_for("author_name");
     my $db                     = Config::get_value_for("database_name");
-    if ( $logged_in_author_name ne $author ) {
+
+    if ( !User::is_valid_login($logged_in_author_name, $session_id) ) { 
         Page->report_error("user", "Unable to peform action.", "You are not logged in.");
     }
 
@@ -368,6 +369,9 @@ sub delete {
     my $author_name  = User::get_logged_in_author_name(); 
     my $session_id   = User::get_logged_in_session_id(); 
 
+    if ( !User::is_valid_login($author_name, $session_id) ) { 
+        Page->report_error("user", "Unable to peform action.", "You are not logged in.");
+    }
 
     my $db = Config::get_value_for("database_name");
 
@@ -405,6 +409,9 @@ sub undelete {
     my $author_name  = User::get_logged_in_author_name(); 
     my $session_id   = User::get_logged_in_session_id(); 
 
+    if ( !User::is_valid_login($author_name, $session_id) ) { 
+        Page->report_error("user", "Unable to peform action.", "You are not logged in.");
+    }
 
     my $db = Config::get_value_for("database_name");
 
@@ -440,28 +447,21 @@ sub show_new_post_form {
     my $author_name  = User::get_logged_in_author_name(); 
     my $session_id   = User::get_logged_in_session_id(); 
 
-#    my $query_string = "/?user_name=$user_name&user_id=$user_id&session_id=$session_id";
-#    my $api_url      = Config::get_value_for("api_url") . '/users/' . $user_name;
-#    if ( $rc >= 200 and $rc < 300 ) {
-#    } elsif ( $rc >= 400 and $rc < 500 ) {
-#        if ( $rc == 401 ) {
-#            my $t = Page->new("notloggedin");
+    if ( !User::is_valid_login($author_name, $session_id) ) { 
+        Page->report_error("user", "Unable to peform action.", "You are not logged in.");
+    }
 
-        my $t = Page->new("newpostform");
-        $t->display_page("Compose new post");
+    my $t = Page->new("newpostform");
+    $t->display_page("Compose new post");
 }
 
 sub show_splitscreen_form {
     my $author_name  = User::get_logged_in_author_name(); 
     my $session_id   = User::get_logged_in_session_id(); 
 
-#    my $query_string = "/?user_name=$user_name&user_id=$user_id&session_id=$session_id";
-#    my $api_url      = Config::get_value_for("api_url") . '/users/' . $user_name;
-#    if ( $rc >= 200 and $rc < 300 ) {
-#    } elsif ( $rc >= 400 and $rc < 500 ) {
-#        if ( $rc == 401 ) {
-#            my $t = Page->new("notloggedin");
-#            $t->display_page("Login");
+    if ( !User::is_valid_login($author_name, $session_id) ) { 
+        Page->report_error("user", "Unable to peform action.", "You are not logged in.");
+    }
 
     my $t = Page->new("splitscreenform");
     $t->set_template_variable("action", "addarticle");
@@ -477,6 +477,10 @@ sub show_post_to_edit {
 
     my $author_name  = User::get_logged_in_author_name(); 
     my $session_id   = User::get_logged_in_session_id(); 
+
+    if ( !User::is_valid_login($author_name, $session_id) ) { 
+        Page->report_error("user", "Unable to peform action.", "You are not logged in.");
+    }
 
     my $post_id = $tmp_hash->{one};
 
@@ -713,6 +717,10 @@ sub splitscreen_edit {
 
     my $author_name  = User::get_logged_in_author_name(); 
     my $session_id   = User::get_logged_in_session_id(); 
+
+    if ( !User::is_valid_login($author_name, $session_id) ) { 
+        Page->report_error("user", "Unable to peform action.", "You are not logged in.");
+    }
 
     my $post_id = $tmp_hash->{one};
 
