@@ -1,0 +1,37 @@
+
+Query String Searches
+---------------------
+
+Search for 'MrX' in the 'name' field 
++name:mrx
+curl 'http://127.0.0.1:9200/dbname/indexname/_search?q=%2Bname%3Amrx&pretty=true' 
+
+
+Search for 'MrX' in the 'name' field that have a 'type' of 'author'.
++name:mrx +type:author
+curl 'http://127.0.0.1:9200/dbname/indexname/_search?q=%2Bname%3Amrx+%2Btype%3Aauthor&pretty=true'
+
+
+Search all fields for the term 'scarf'.
+curl 'http://127.0.0.1:9200/dbname/indexname/_search?q=scarf&pretty=true'
+
+
+Search the 'markup' field for the term 'scarf' for docs of type 'post' that have a status of 'public'.
++type:post +post_status:public +markup:scarf
+curl 'http://127.0.0.1:9200/dbname/indexname/_search?q=%2Btype%3Apost+%2Bpost_status%3Apublic+%2Bmarkup%3Ascarf&pretty=true'
+
+
+searching for exact phrase of 'looks like candy'.
+curl 'http://127.0.0.1:9200/dbname/indexname/_search?q=%2Btype%3Apost+%2Bpost_status%3Apublic+%2Bmarkup%3Alooks+like+candy&pretty=true'
+
+
+search for exact phrase of 'Scarf for Mom' with all lowercase text provided. search is case insensitive.
++type:post +post_status:public +markup:scarf for mom
+curl 'http://127.0.0.1:9200/dbname/indexname/_search?q=%2Btype%3Apost+%2Bpost_status%3Apublic+%2Bmarkup%3Ascarf+for+mom&pretty=true'
+
+
+
+Query DSL with JSON
+-------------------
+
+curl -XGET  http://127.0.0.1:9200/scaupdvlp1/scaupdvlp1/_search -d '{"query" : { "term" : {"markup" : "scarf" }} }'

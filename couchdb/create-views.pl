@@ -66,19 +66,20 @@ $perl_hash->{'views'}->{'post_full'}->{'map'} = $view_js;
 
 
 
+# 24apr2015 - implemented elasticsearch, therefore i no longer need this view, but i'll keep around, just in case ...
 # get stream of results for a single word search that is surrounded by word boundaries and not a word that's a substring.
-$view_js =  <<VIEWJS3;
-function(doc) {
-    if( doc.type === 'post' && doc.post_status === 'public' ) {
-        var txt = doc.markup;
-        var words = txt.replace(/[!.,;]+/g,"").toLowerCase().split(" ");
-        for (var word in words) {
-            emit([ words[word], doc.updated_at ], {slug: doc._id, text_intro: doc.text_intro, more_text_exists: doc.more_text_exists, tags: doc.tags, post_type: doc.post_type, author: doc.author, updated_at: doc.updated_at, reading_time: doc.reading_time});
-        }
-    }
-}
-VIEWJS3
-$perl_hash->{'views'}->{'single_word_search'}->{'map'} = $view_js;
+# $view_js =  <<VIEWJS3;
+#function(doc) {
+#    if( doc.type === 'post' && doc.post_status === 'public' ) {
+#        var txt = doc.markup;
+#        var words = txt.replace(/[!.,;]+/g,"").toLowerCase().split(" ");
+#        for (var word in words) {
+#            emit([ words[word], doc.updated_at ], {slug: doc._id, text_intro: doc.text_intro, more_text_exists: doc.more_text_exists, tags: doc.tags, post_type: doc.post_type, author: doc.author, updated_at: doc.updated_at, reading_time: doc.reading_time});
+#        }
+#    }
+#}
+#VIEWJS3
+#$perl_hash->{'views'}->{'single_word_search'}->{'map'} = $view_js;
 
 
 

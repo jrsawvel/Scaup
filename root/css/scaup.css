@@ -32,6 +32,7 @@ margin spacing: 40px used at:
  .box
  .highlighted
  .highlighted p
+ h2, h3, h4
 */ 
 
 
@@ -101,7 +102,6 @@ table {
 h1, h2, h3, h4, h5 {
     color: #000000;
     font-family: "Open Sans", Arial, Helvetica, sans-serif;  
-/*    font-family: 'Libre Baskerville', serif;  */
 }
 
 h1 {
@@ -129,7 +129,8 @@ h5 {
 }
 
 h2, h3, h4 {
-    margin: 50px 0 10px 0;
+    /* margin: 50px 0 10px 0; */
+    margin: 60px 0 40px 0;
     padding: 0;
 }
 
