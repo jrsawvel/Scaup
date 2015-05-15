@@ -214,10 +214,16 @@ sub search {
         if ( length($keyword) < 1 ) {
             Page->report_error("user", "Missing data.", "Enter keyword(s) to search on.");
         }
-        
-        # $keyword =~ s/ /\+/g;
-        # $keyword = uri_escape($hash{search_string});
+    } else { 
+        $keyword = uri_unescape($keyword);
+          # CGI.pm will deal with escaped blanks in query string that contain %20.
+          # if the more friendly + signs are used for spaces in query string, deal with it here.
+          #        $search_string =~ s/\+/ /g;
     }
+
+    my $search_uri_str = $keyword;
+    $search_uri_str =~ s/ /\+/g;
+    $search_uri_str = uri_escape($search_uri_str);
 
     my $db = Config::get_value_for("database_name");
 
@@ -285,6 +291,7 @@ sub search {
     $t->set_template_loop_data("stream_loop", \@posts);
     $t->set_template_variable("search", 1);
     $t->set_template_variable("keyword", $keyword);
+    $t->set_template_variable("search_uri_str", $search_uri_str);
     $t->set_template_variable("search_type_text", "Search");
     $t->set_template_variable("search_type", "search");
 
@@ -301,8 +308,8 @@ sub search {
     }
     my $previous_page_num = $page_num - 1;
     my $next_page_num = $page_num + 1;
-    my $next_page_url = "/search/$keyword/$next_page_num";
-    my $previous_page_url = "/search/$keyword/$previous_page_num";
+    my $next_page_url = "/search/$search_uri_str/$next_page_num";
+    my $previous_page_url = "/search/$search_uri_str/$previous_page_num";
     $t->set_template_variable("next_page_url", $next_page_url);
     $t->set_template_variable("previous_page_url", $previous_page_url);
 
@@ -405,6 +412,7 @@ sub tag_search {
     $t->set_template_loop_data("stream_loop", \@posts);
     $t->set_template_variable("search", 1);
     $t->set_template_variable("keyword", $keyword);
+    $t->set_template_variable("search_uri_str", $keyword);
     $t->set_template_variable("search_type_text", "Tag search");
     $t->set_template_variable("search_type", "tag");
     if ( $page_num == 1 ) {
@@ -417,6 +425,7 @@ sub tag_search {
     } else {
         $t->set_template_variable("not_last_page", 0);
     }
+
     my $previous_page_num = $page_num - 1;
     my $next_page_num = $page_num + 1;
     my $next_page_url = "/tag/$keyword/$next_page_num";
