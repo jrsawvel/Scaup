@@ -353,10 +353,26 @@ sub tag_search {
     my $c = CouchDB::Client->new();
     $c->testConnection or Page->report_error("system", "Database error.", "The server cannot be reached.");
 
+    my $max_entries = Config::get_value_for("max_entries_on_page");
+
+    my $skip_count = ($max_entries * $page_num) - $max_entries;
+
 #    $rc = $c->req('GET', $db . "/_design/views/_view/tag_search?reduce=false&startkey=\"$keyword\"&endkey=\"$keyword\"");
-    $rc = $c->req('GET', $db . "/_design/views/_view/tag_search?reduce=false&startkey=[\"$keyword\", {}]&endkey=[\"$keyword\"]&descending=true");
+
+#    $rc = $c->req('GET', $db . "/_design/views/_view/tag_search?reduce=false&startkey=[\"$keyword\", {}]&endkey=[\"$keyword\"]&descending=true&skip=" . $skip_count . "&limit=" . ($max_entries + 1) );
+
+    my $couchdb_uri = $db . "/_design/views/_view/tag_search?descending=true&limit=" . ($max_entries + 1) . "&skip=" . $skip_count;
+    $couchdb_uri = $couchdb_uri . "&startkey=[\"$keyword\", {}]&endkey=[\"$keyword\"]";
+
+    $rc = $c->req('GET', $couchdb_uri);
 
     my $stream = $rc->{'json'}->{'rows'};
+
+    my $next_link_bool = 0;
+    my $len = @$stream;
+    if ( $len > $max_entries ) {
+        $next_link_bool = 1;
+    }
 
     if ( !$stream ) {
         Page->success("Search results for $keyword", "No matches found.", "");
@@ -369,6 +385,7 @@ sub tag_search {
 
     my @posts;
 
+    my $ctr=0;
     foreach my $hash_ref ( @$stream ) {
         my $tags = $hash_ref->{'value'}->{'tags'};
         if ( $tags->[0] ) {
@@ -381,6 +398,7 @@ sub tag_search {
         delete($hash_ref->{'value'}->{'tags'});
         $hash_ref->{'value'}->{'updated_at'} = Utils::format_date_time($hash_ref->{'value'}->{'updated_at'});
         push(@posts, $hash_ref->{'value'});
+        last if ++$ctr == $max_entries;
     }
 
     my $t = Page->new("stream");
@@ -389,6 +407,22 @@ sub tag_search {
     $t->set_template_variable("keyword", $keyword);
     $t->set_template_variable("search_type_text", "Tag search");
     $t->set_template_variable("search_type", "tag");
+    if ( $page_num == 1 ) {
+        $t->set_template_variable("not_page_one", 0);
+    } else {
+        $t->set_template_variable("not_page_one", 1);
+    }
+    if ( $len >= $max_entries && $next_link_bool ) {
+        $t->set_template_variable("not_last_page", 1);
+    } else {
+        $t->set_template_variable("not_last_page", 0);
+    }
+    my $previous_page_num = $page_num - 1;
+    my $next_page_num = $page_num + 1;
+    my $next_page_url = "/tag/$keyword/$next_page_num";
+    my $previous_page_url = "/tag/$keyword/$previous_page_num";
+    $t->set_template_variable("next_page_url", $next_page_url);
+    $t->set_template_variable("previous_page_url", $previous_page_url);
     $t->display_page("Tag search results for $keyword");
 }
 
