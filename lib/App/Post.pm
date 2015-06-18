@@ -7,7 +7,7 @@ use CouchDB::Client;
 use HTML::Entities;
 use Encode;
 use LWP::UserAgent;
-use Text::MultiMarkdown;
+use Text::MultiMarkdownScaup;
 use Text::Textile;
 use JSON::PP;
 use REST::Client;
@@ -559,7 +559,7 @@ sub _markup_to_html {
         my $textile = new Text::Textile;
         $html = $textile->process($html);
     } else {
-        my $md   = Text::MultiMarkdown->new;
+        my $md   = Text::MultiMarkdownScaup->new;
         $html = $md->markdown($html, {heading_ids => 0} );
     }
 
@@ -567,6 +567,9 @@ sub _markup_to_html {
     $html =~ s/&#39;/'/sg;
 
     $html = _create_heading_list($html, $slug);
+
+#$html =~ s/^q[.][.]/\n<\/div>/igm;
+#$formattedcontent =~ s/^q[.]/<div class="highlighted" markdown="1">\n/igm;
 
     return $html;
 }

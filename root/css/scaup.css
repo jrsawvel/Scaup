@@ -313,6 +313,10 @@ footer {
     margin-bottom: 40px;
 }
 
+.post li > ul {
+    margin-bottom: 0;
+}
+
 .post p {
     /* margin: 35px 0 35px 0; */
     margin: 0 0 40px 0;
@@ -452,9 +456,14 @@ footer {
 
 
 .highlighted p {
-    margin: 40px 0 0 0;
     padding: 0;
 }
+
+.highlighted p:last-child {
+    margin: 0 0 0 0; 
+}
+
+
 
 /* d. next three elements are used when comparing two versions of a post */
 .added {

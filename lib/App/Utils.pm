@@ -306,15 +306,22 @@ sub custom_commands {
     # br.
     # hr.
     # more.
+    # pq. and pq..
 
-    $formattedcontent =~ s/^q[.][.]/\n<\/div>/igm;
-    $formattedcontent =~ s/^q[.]/<div class="highlighted" markdown="1">/igm;
+#    $formattedcontent =~ s/^q[.][.]/\n<\/div>/igm;
+#    $formattedcontent =~ s/^q[.]/<div class="highlighted" markdown="1">\n/igm;
+
+    $formattedcontent =~ s/^q[.][.]/\n<\/blockquote>/igm;
+    $formattedcontent =~ s/^q[.]/<blockquote class="highlighted" markdown="1">\n/igm;
 
     $formattedcontent =~ s/^hr[.]/<hr class="shortgrey" \/>/igm;
 
     $formattedcontent =~ s/^br[.]/<br \/>/igm;
 
     $formattedcontent =~ s/^more[.]/<more \/>/igm;
+
+    $formattedcontent =~ s/pq[.][.]/<\/em><\/big><\/center>/igm;
+    $formattedcontent =~ s/^pq[.]/<center><big><em>/igm;
 
     return $formattedcontent;
 }
