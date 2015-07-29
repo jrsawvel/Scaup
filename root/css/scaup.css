@@ -329,7 +329,7 @@ footer {
 
 /* for the h1 title on the article page */
 #post-top {
-    padding-top: 10px;  
+    padding-top: 40px;
 }
 
 /* on the stream page that show parts of a post/article */
@@ -442,7 +442,8 @@ footer {
 .highlighted {
     /* border-left: .1em solid #666;   */
     border: 1px solid #cccccc;
-    background: #fafafa;
+    background: #f5faff;
+    /* background: #fafafa; */
     padding: 5px;
     margin-bottom: 40px;
     
@@ -808,6 +809,14 @@ footer {
 
 /* 37.5em = 600px */
 @media only screen and (max-width: 37.5em) {
+    #content {
+        padding-top: 20px;
+    }
+
+    #post-top {
+        padding-top: 20px;
+    } 
+
     .stream-imageheader {
         height: 240px;
     }
@@ -851,7 +860,6 @@ footer {
 
     h1 {
         font-size: 1.40em;
-        margin-top: 10px;
     }
 
     h2 {
@@ -967,11 +975,6 @@ line-height: 140%;
     }
 }
 
-@media only screen and (max-width: 900px) {
-    #content {
-        padding-top: 10px;
-    }
-}
 
 /* 76.5em = 1224 px */
 @media only screen and (min-width: 76.5em) { 
